@@ -1,0 +1,5 @@
+print("HELLO WORD!!!")
+print("!bievenido a fundamentos de programacion en Python!")
+print("ESTO ES EL MODO SANDBOX.")
+algo=input('dime algo\n')
+print('eso parece interesante', algo)
