@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
 #este progrma hace el juego de TIC TAC TOE
+
+print('\033[5;32;40m')
 
 from random import randrange
 
@@ -139,29 +142,61 @@ def DrawMove(libres):
 	return compu
 
 
-
-board=[[1,2,3],[4,'X',6],[7,8,9]]
-DisplayBoard(board)
+board=[[1,2,3],[4,5,6],[7,8,9]]
 board,libres=MakeListOfFreeFields(board)
-print('libres:',libres)
-VictoryFor(board,libres)
+
+while True: 
+
+	turno = input('Quien empieza, tu o yo?\n')
+
+	if turno =='yo':
+		turno=1
+		DisplayBoard(board)
+		break
+	elif turno =='tu':
+		turno=0
+		break
+	else:
+		print('Solo estamos jugando tu y yo')
+
 
 while True:
 
-	valor=EnterMove(libres)
-	board,libres=MakeListOfFreeFields(board,valor,1)
+	if turno == 0:
+		valor=DrawMove(libres)
+		next_turno=1
+	elif turno ==1:
+		valor=EnterMove(libres)
+		next_turno=0
+		
+	board,libres=MakeListOfFreeFields(board,valor,turno)
 	DisplayBoard(board)
-	print('tu valor fue:',valor)
+	if turno == 0:
+		print('compu:',valor)
+	elif turno == 1:
+		print('Tu valor fue:',valor)
 	print('libres:',libres)
 	gana=VictoryFor(board,libres)
 	if gana !=None:
 		break 
+	
+	turno=next_turno
+		
+	#valor=DrawMove(libres)
+	#board,libres=MakeListOfFreeFields(board,valor,0)
+	#DisplayBoard(board)
+	#print('compu:',valor)
+	#print('libres:',libres)
+	#gana=VictoryFor(board,libres)
+	#if gana !=None:
+	#	break 
 
-	valor=DrawMove(libres)
-	board,libres=MakeListOfFreeFields(board,valor,0)
-	DisplayBoard(board)
-	print('compu:',valor)
-	print('libres:',libres)
-	gana=VictoryFor(board,libres)
-	if gana !=None:
-		break 
+	#valor=EnterMove(libres)
+	#board,libres=MakeListOfFreeFields(board,valor,1)
+	#DisplayBoard(board)
+	#print('tu valor fue:',valor)
+	#print('libres:',libres)
+	#gana=VictoryFor(board,libres)
+	#if gana !=None:
+	#	break 
+
